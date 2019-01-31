@@ -348,17 +348,22 @@
                 NumericUpDown1.Value = _objSENLOG.SampleCount - 1
             End If
         End If
-
-        If key = Keys.Z And e.Modifiers = Keys.Control Then
-            NumericUpDown1.Value = _tag.undo()
-        End If
-
-        If key = Keys.U Then
-            NumericUpDown1.Value = _tag.undo()
-        End If
-        If key = Keys.R Then
-            NumericUpDown1.Value = _tag.redo()
-        End If
+        Select Case key
+            Case Keys.U
+                NumericUpDown1.Value = _tag.undo()
+            Case Keys.R
+                NumericUpDown1.Value = _tag.redo()
+            Case Keys.Z
+                If e.Modifiers = Keys.Control Then
+                    NumericUpDown1.Value = _tag.undo()
+                End If
+            Case Keys.L
+                NumericUpDown1.Value = _tag.nextTag(NumericUpDown1.Value)
+            Case Keys.H
+                NumericUpDown1.Value = _tag.prevTag(NumericUpDown1.Value)
+            Case Keys.X
+                NumericUpDown1.Value = _tag.delPrev(NumericUpDown1.Value)
+        End Select
 
     End Sub
 
@@ -381,7 +386,6 @@
                 NumericUpDown1.Value -= 300
             End If
         Catch ex As Exception
-
         End Try
     End Sub
 End Class

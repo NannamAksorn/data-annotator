@@ -27,9 +27,18 @@ Public Class Tag
         If _tagList.Count <> 0 Then
             For index As Integer = _tagList.Count - 1 To 0 Step -1
                 If data(0) > _tagList(index)(0) Then
+                    If index + 1 < _tagList.Count Then
+                        If _tagList(index + 1)(0) = data(0) Then
+                            deleteAt(index + 1)
+                            Trace.WriteLine("23423423423423423")
+
+                        End If
+                    End If
+
                     _tagList.Insert(index + 1, data)
                     addButton(index + 1, data)
                     _undostack.Push({INSERT, index + 1, data})
+
                     Return
                 End If
             Next
@@ -91,6 +100,36 @@ Public Class Tag
             Return _tagList
         End Get
     End Property
+
+    Public Function nextTag(currentTag As Integer)
+        For Each tag In _tagList
+            If currentTag < tag(0) Then
+                Return tag(0)
+            End If
+        Next
+        Return 0
+    End Function
+
+    Public Function prevTag(currentTag As Integer)
+        For i As Integer = _tagList.Count - 1 To 0 Step -1
+            If currentTag > _tagList(i)(0) Then
+                Return _tagList(i)(0)
+            End If
+        Next i
+        Return 0
+    End Function
+
+    Public Function delPrev(currentTag As Integer)
+        For i As Integer = _tagList.Count - 1 To 0 Step -1
+            If currentTag >= _tagList(i)(0) Then
+                Dim ret = _tagList(i)(0)
+                _undostack.Push({DELETE, i, _tagList(i)})
+                deleteAt(i)
+                Return ret
+            End If
+        Next i
+        Return 0
+    End Function
 
     Public Function undo()
         Try
