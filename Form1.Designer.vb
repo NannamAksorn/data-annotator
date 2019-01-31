@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TxtLOGFILE = New System.Windows.Forms.TextBox()
@@ -54,29 +54,27 @@ Partial Class Form1
         '
         Me.TxtLOGFILE.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtLOGFILE.Location = New System.Drawing.Point(95, 11)
-        Me.TxtLOGFILE.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtLOGFILE.Location = New System.Drawing.Point(71, 9)
         Me.TxtLOGFILE.Name = "TxtLOGFILE"
-        Me.TxtLOGFILE.Size = New System.Drawing.Size(1071, 22)
+        Me.TxtLOGFILE.ReadOnly = True
+        Me.TxtLOGFILE.Size = New System.Drawing.Size(804, 20)
         Me.TxtLOGFILE.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 15)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(2, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(75, 17)
+        Me.Label1.Size = New System.Drawing.Size(65, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "ログファイル :"
         '
         'BtnLOGFILE
         '
         Me.BtnLOGFILE.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnLOGFILE.Location = New System.Drawing.Point(1168, 8)
-        Me.BtnLOGFILE.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnLOGFILE.Location = New System.Drawing.Point(876, 6)
         Me.BtnLOGFILE.Name = "BtnLOGFILE"
-        Me.BtnLOGFILE.Size = New System.Drawing.Size(44, 31)
+        Me.BtnLOGFILE.Size = New System.Drawing.Size(33, 25)
         Me.BtnLOGFILE.TabIndex = 14
         Me.BtnLOGFILE.Text = "..."
         Me.BtnLOGFILE.UseVisualStyleBackColor = True
@@ -96,10 +94,10 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.SplitContainer1)
         Me.Panel1.Controls.Add(Me.HScrollBar1)
         Me.Panel1.Controls.Add(Me.PBoxWAVE)
-        Me.Panel1.Location = New System.Drawing.Point(5, 73)
+        Me.Panel1.Location = New System.Drawing.Point(4, 89)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1207, 651)
+        Me.Panel1.Size = New System.Drawing.Size(905, 499)
         Me.Panel1.TabIndex = 15
         '
         'SplitContainer1
@@ -107,7 +105,8 @@ Partial Class Form1
         Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitContainer1.Location = New System.Drawing.Point(7, 102)
+        Me.SplitContainer1.Location = New System.Drawing.Point(5, 83)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -117,8 +116,9 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.AxWindowsMediaPlayer1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1192, 523)
-        Me.SplitContainer1.SplitterDistance = 680
+        Me.SplitContainer1.Size = New System.Drawing.Size(894, 395)
+        Me.SplitContainer1.SplitterDistance = 510
+        Me.SplitContainer1.SplitterWidth = 3
         Me.SplitContainer1.TabIndex = 22
         '
         'PBoxVIEW
@@ -129,7 +129,7 @@ Partial Class Form1
         Me.PBoxVIEW.Location = New System.Drawing.Point(0, 0)
         Me.PBoxVIEW.Margin = New System.Windows.Forms.Padding(0)
         Me.PBoxVIEW.Name = "PBoxVIEW"
-        Me.PBoxVIEW.Size = New System.Drawing.Size(680, 523)
+        Me.PBoxVIEW.Size = New System.Drawing.Size(510, 395)
         Me.PBoxVIEW.TabIndex = 19
         Me.PBoxVIEW.TabStop = False
         '
@@ -138,10 +138,11 @@ Partial Class Form1
         Me.AxWindowsMediaPlayer1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(103, 465)
+        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(103, 451)
+        Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(328, 23)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(332, 23)
         Me.AxWindowsMediaPlayer1.TabIndex = 21
         '
         'HScrollBar1
@@ -149,10 +150,10 @@ Partial Class Form1
         Me.HScrollBar1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.HScrollBar1.LargeChange = 1
-        Me.HScrollBar1.Location = New System.Drawing.Point(0, 628)
+        Me.HScrollBar1.Location = New System.Drawing.Point(0, 480)
         Me.HScrollBar1.Maximum = 0
         Me.HScrollBar1.Name = "HScrollBar1"
-        Me.HScrollBar1.Size = New System.Drawing.Size(1207, 17)
+        Me.HScrollBar1.Size = New System.Drawing.Size(905, 17)
         Me.HScrollBar1.TabIndex = 20
         '
         'PBoxWAVE
@@ -164,7 +165,7 @@ Partial Class Form1
         Me.PBoxWAVE.Location = New System.Drawing.Point(0, 0)
         Me.PBoxWAVE.Margin = New System.Windows.Forms.Padding(0)
         Me.PBoxWAVE.Name = "PBoxWAVE"
-        Me.PBoxWAVE.Size = New System.Drawing.Size(1205, 99)
+        Me.PBoxWAVE.Size = New System.Drawing.Size(905, 81)
         Me.PBoxWAVE.TabIndex = 18
         Me.PBoxWAVE.TabStop = False
         Me.PBoxWAVE.Visible = False
@@ -172,67 +173,61 @@ Partial Class Form1
         'Lblサンプル位置
         '
         Me.Lblサンプル位置.AutoSize = True
-        Me.Lblサンプル位置.Location = New System.Drawing.Point(208, 47)
-        Me.Lblサンプル位置.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Lblサンプル位置.Location = New System.Drawing.Point(156, 38)
         Me.Lblサンプル位置.Name = "Lblサンプル位置"
-        Me.Lblサンプル位置.Size = New System.Drawing.Size(204, 17)
+        Me.Lblサンプル位置.Size = New System.Drawing.Size(151, 13)
         Me.Lblサンプル位置.TabIndex = 18
         Me.Lblサンプル位置.Text = "9(99:99:99) 999,999(99:99:99)"
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(95, 44)
-        Me.NumericUpDown1.Margin = New System.Windows.Forms.Padding(4)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(71, 36)
         Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(105, 22)
+        Me.NumericUpDown1.Size = New System.Drawing.Size(79, 20)
         Me.NumericUpDown1.TabIndex = 19
         Me.NumericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LblP0
         '
         Me.LblP0.AutoSize = True
-        Me.LblP0.Location = New System.Drawing.Point(511, 47)
-        Me.LblP0.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblP0.Location = New System.Drawing.Point(383, 38)
         Me.LblP0.Name = "LblP0"
-        Me.LblP0.Size = New System.Drawing.Size(61, 17)
+        Me.LblP0.Size = New System.Drawing.Size(49, 13)
         Me.LblP0.TabIndex = 20
         Me.LblP0.Text = "P0 : xxxx"
         '
         'LblP1
         '
         Me.LblP1.AutoSize = True
-        Me.LblP1.Location = New System.Drawing.Point(603, 47)
-        Me.LblP1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblP1.Location = New System.Drawing.Point(452, 38)
         Me.LblP1.Name = "LblP1"
-        Me.LblP1.Size = New System.Drawing.Size(61, 17)
+        Me.LblP1.Size = New System.Drawing.Size(49, 13)
         Me.LblP1.TabIndex = 21
         Me.LblP1.Text = "P1 : xxxx"
         '
         'LblW0
         '
         Me.LblW0.AutoSize = True
-        Me.LblW0.Location = New System.Drawing.Point(699, 47)
-        Me.LblW0.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblW0.Location = New System.Drawing.Point(524, 38)
         Me.LblW0.Name = "LblW0"
-        Me.LblW0.Size = New System.Drawing.Size(65, 17)
+        Me.LblW0.Size = New System.Drawing.Size(53, 13)
         Me.LblW0.TabIndex = 22
         Me.LblW0.Text = "W0 : xxxx"
         '
         'LblW1
         '
         Me.LblW1.AutoSize = True
-        Me.LblW1.Location = New System.Drawing.Point(796, 47)
-        Me.LblW1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblW1.Location = New System.Drawing.Point(597, 38)
         Me.LblW1.Name = "LblW1"
-        Me.LblW1.Size = New System.Drawing.Size(65, 17)
+        Me.LblW1.Size = New System.Drawing.Size(53, 13)
         Me.LblW1.TabIndex = 23
         Me.LblW1.Text = "W1 : xxxx"
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1216, 736)
+        Me.ClientSize = New System.Drawing.Size(912, 598)
         Me.Controls.Add(Me.LblW1)
         Me.Controls.Add(Me.LblW0)
         Me.Controls.Add(Me.LblP1)
@@ -244,8 +239,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtLOGFILE)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MinimumSize = New System.Drawing.Size(847, 384)
+        Me.MinimumSize = New System.Drawing.Size(639, 319)
         Me.Name = "Form1"
         Me.Text = "センサーログビューア"
         Me.Panel1.ResumeLayout(False)

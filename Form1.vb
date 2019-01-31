@@ -6,6 +6,7 @@
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         OpenFileDialog1.FileName = ""
         TxtLOGFILE.Text = ""
+        Me.KeyPreview = True
     End Sub
 
     Private Sub BtnLOGFILE_Click(sender As System.Object, e As System.EventArgs) Handles BtnLOGFILE.Click
@@ -42,7 +43,7 @@
                 Me.Cursor = Cursors.WaitCursor
                 Trace.WriteLine("■LOAD START = " & TxtLOGFILE.Text & " " & Now)
                 _objSENLOG = New Sen3Log(TxtLOGFILE.Text)
-                _tag = New Tag(TxtLOGFILE.Text)
+                _tag = New Tag(Me, TxtLOGFILE.Text)
 
                 Trace.WriteLine("load tag")
                 _tag.add({27120, 3})
@@ -206,11 +207,10 @@
         '現行位置
         x1 = _getWavePointX(NumericUpDown1.Value)
         e.Graphics.DrawLine(Pens.Pink, x1, 0, x1, PBoxWAVE.ClientSize.Height - 1)
-        Trace.WriteLine("■PBoxWAVE_Paint END  " & Now)
 
     End Sub
 
-    Private Function _getWavePointX(ByVal x As Long) As Long
+    Public Function _getWavePointX(ByVal x As Long) As Long
         _getWavePointX = (x * PBoxWAVE.ClientSize.Width) / _objSENLOG.SampleCount
         'Trace.WriteLine(x & " --> " & _getWavePointX & "  " & PBoxWAVE.ClientSize.Width & ":" & _objSENLOG.SampleCount)
     End Function
@@ -226,7 +226,6 @@
         Dim wGyap As Integer = 6 + (PBoxVIEW.ClientSize.Height Mod 2)
         Dim wHeight As Integer = (PBoxVIEW.ClientSize.Height - wGyap) / 3
 
-        Trace.WriteLine("■PBoxVIEW_Paint START  " & Now)
         e.Graphics.FillRectangle(Brushes.Black, e.ClipRectangle)
         If IsNothing(_objSENLOG) Then Exit Sub
 
@@ -301,8 +300,6 @@
 
         '####
 
-        Trace.WriteLine("■PBoxVIEW_Paint END  " & Now)
-
     End Sub
     Private Function getColor(ByVal key As Integer) As Brush
         Dim brush As Brush
@@ -325,4 +322,32 @@
         Return brush
 
     End Function
+
+    Private Sub Form1_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+        If Not IsNothing(_tag) Then
+            _tag.update()
+        End If
+    End Sub
+
+    Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+        If e.KeyChar >= "0" And e.KeyChar <= "9" Then
+            Dim key As Integer = Integer.Parse(e.KeyChar)
+            Dim Index As Integer = NumericUpDown1.Value
+            _tag.add({Index, key})
+            MyBase.Refresh()
+        End If
+    End Sub
+
+    Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+        Dim key = e.KeyCode
+        If key = Keys.Delete Or key = Keys.X Then
+            Trace.WriteLine("DELETE")
+        ElseIf key = Keys.G Then
+            NumericUpDown1.Value = 0
+            If e.Modifiers = Keys.Shift Then
+                NumericUpDown1.Value = _objSENLOG.SampleCount - 1
+            End If
+        End If
+
+    End Sub
 End Class
