@@ -349,5 +349,39 @@
             End If
         End If
 
+        If key = Keys.Z And e.Modifiers = Keys.Control Then
+            NumericUpDown1.Value = _tag.undo()
+        End If
+
+        If key = Keys.U Then
+            NumericUpDown1.Value = _tag.undo()
+        End If
+        If key = Keys.R Then
+            NumericUpDown1.Value = _tag.redo()
+        End If
+
+    End Sub
+
+    Private Sub Form1_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseWheel
+        Try
+            If e.Delta > 0 Then
+                NumericUpDown1.Value += 30
+            Else
+                NumericUpDown1.Value -= 30
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub PBoxWAVE_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PBoxWAVE.MouseWheel
+        Try
+            If e.Delta > 0 Then
+                NumericUpDown1.Value += 300
+            Else
+                NumericUpDown1.Value -= 300
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

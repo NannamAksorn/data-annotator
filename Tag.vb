@@ -1,10 +1,15 @@
 ﻿Imports System.IO
-
 Public Class Tag
+    Private Const INSERT = 0
+    Private Const DELETE = 1
     Private _objFS As FileStream = Nothing
     Private _tagList As New ArrayList
     Private _buttonList As New ArrayList
     Private _form As Form
+
+
+    Private _undostack As Stack = New Stack()
+    Private _redostack As Stack = New Stack()
 
     Public Sub New(ByVal form As Form, ByVal strFilePath As String)
         _form = form
@@ -23,13 +28,15 @@ Public Class Tag
             For index As Integer = _tagList.Count - 1 To 0 Step -1
                 If data(0) > _tagList(index)(0) Then
                     _tagList.Insert(index + 1, data)
-                    addButton(index, data)
+                    addButton(index + 1, data)
+                    _undostack.Push({INSERT, index + 1, data})
                     Return
                 End If
             Next
         End If
         _tagList.Insert(0, data)
-        addButton(-1, data)
+        addButton(0, data)
+        _undostack.Push({INSERT, 0, data})
     End Sub
 
     Private Sub addButton(ByVal index As Integer, ByVal data As Array)
@@ -45,7 +52,7 @@ Public Class Tag
         End If
         _form.Controls.Add(btn)
         AddHandler btn.Click, AddressOf delHandler
-        _buttonList.Insert(index + 1, btn)
+        _buttonList.Insert(index, btn)
 
     End Sub
 
@@ -55,16 +62,22 @@ Public Class Tag
         Next
     End Sub
 
-    Private Sub delHandler(sender As Object, e As EventArgs)
-        Dim Index = _buttonList.IndexOf(sender)
+    Private Sub deleteAt(Index As Integer)
         Dim i = _tagList(Index)(0)
+        _form.Controls.Remove(_buttonList(Index))
+        _buttonList(Index).Dispose()
         _buttonList.RemoveAt(Index)
         _tagList.RemoveAt(Index)
-        _form.Controls.Remove(sender)
-        sender.Dispose()
 
         Form1.NumericUpDown1.Value = i
         _form.Refresh()
+    End Sub
+
+    Private Sub delHandler(sender As Object, e As EventArgs)
+        Dim Index = _buttonList.IndexOf(sender)
+        _undostack.Push({DELETE, Index, _tagList(Index)})
+        deleteAt(Index)
+
     End Sub
 
     Public ReadOnly Property size As Integer
@@ -79,5 +92,38 @@ Public Class Tag
         End Get
     End Property
 
+    Public Function undo()
+        Try
+            Dim command As Array = _undostack.Pop()
+            _redostack.Push(command)
+            Select Case command(0)
+                Case INSERT
+                    deleteAt(command(1))
+                Case DELETE
+                    _tagList.Insert(command(1), command(2))
+                    addButton(command(1), command(2))
+            End Select
+            Return command(2)(0)
 
+        Catch ex As Exception
+            Return 0
+        End Try
+    End Function
+
+    Public Function redo()
+        Try
+            Dim command As Array = _redostack.Pop()
+            _undostack.Push(command)
+            Select Case command(0)
+                Case INSERT
+                    _tagList.Insert(command(1), command(2))
+                    addButton(command(1), command(2))
+                Case DELETE
+                    deleteAt(command(1))
+            End Select
+            Return command(2)(0)
+        Catch ex As Exception
+            Return 0
+        End Try
+    End Function
 End Class
