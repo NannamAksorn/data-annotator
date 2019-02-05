@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-
+Imports System.Text.RegularExpressions
 Public Class Sen3Log
 
     Private _objFS As FileStream = Nothing
@@ -8,7 +8,7 @@ Public Class Sen3Log
     Private arrP1() As Byte
     Private arrW0() As Byte
     Private arrW1() As Byte
-
+    Private time As Date
 
     Public Shared ReadOnly Property IsLogFile(ByVal strFilePath As String) As Boolean
         Get
@@ -33,6 +33,12 @@ Public Class Sen3Log
             Return isJudge
         End Get
     End Property
+    Private Function parseDate(strFilePath As String)
+        Dim match As Match = Regex.Matches(strFilePath, "_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})")
+        If match.Success Then
+            Console.WriteLine(match.Groups[1].value)
+        End If
+    End Function
 
 
     Public Sub New(ByVal strFilePath As String)
@@ -40,7 +46,7 @@ Public Class Sen3Log
 
         Try
             _objFS = New FileStream(strFilePath, FileMode.Open)
-
+            parseDate(strFilePath)
             'センサーデータファイルをチェックする
             Dim packet(44) As Byte
             Dim nPacket As Integer = (_objFS.Length / packet.Length)

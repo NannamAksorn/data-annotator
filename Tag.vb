@@ -21,6 +21,11 @@ Public Class Tag
             _objFS.Close()
             _objFS = Nothing
         End If
+        If Not IsNothing(_tagList) Then
+            For index As Integer = 0 To _tagList.Count - 1
+                deleteAt(0)
+            Next
+        End If
     End Sub
 
     Public Sub add(ByVal data As Array)
@@ -30,8 +35,6 @@ Public Class Tag
                     If index + 1 < _tagList.Count Then
                         If _tagList(index + 1)(0) = data(0) Then
                             deleteAt(index + 1)
-                            Trace.WriteLine("23423423423423423")
-
                         End If
                     End If
 
@@ -42,6 +45,9 @@ Public Class Tag
                     Return
                 End If
             Next
+            If _tagList(0)(0) = data(0) Then
+                deleteAt(0)
+            End If
         End If
         _tagList.Insert(0, data)
         addButton(0, data)
@@ -56,10 +62,15 @@ Public Class Tag
         btn.Size = New Size(20, 20)
         If (data(1) \ 10 < 1) Then
             btn.Text = data(1)
-        Else
+        End If
+        If data(1) = 9 Then
             btn.Text = "T"
+            btn.Top -= 10
         End If
         _form.Controls.Add(btn)
+
+        btn.BringToFront()
+
         AddHandler btn.Click, AddressOf delHandler
         _buttonList.Insert(index, btn)
 

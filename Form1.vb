@@ -1,7 +1,12 @@
-﻿Public Class Form1
+﻿Imports System.IO
+
+Public Class Form1
     Private _tag As Tag = Nothing
     Private _objSENLOG As Sen3Log = Nothing
     Private Const VIEW_GYAP As Integer = 10
+
+    Private sendatFiles As ArrayList = New ArrayList
+    Private videoFiles As ArrayList = New ArrayList
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         OpenFileDialog1.FileName = ""
@@ -11,7 +16,16 @@
 
     Private Sub BtnLOGFILE_Click(sender As System.Object, e As System.EventArgs) Handles BtnLOGFILE.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            getSendatFiles(Path.GetDirectoryName(OpenFileDialog1.FileName))
             TxtLOGFILE.Text = OpenFileDialog1.FileName
+        End If
+    End Sub
+
+    Private Sub BtnVideoFile_Click(sender As Object, e As EventArgs) Handles BtnVideoFile.Click
+        If OpenFileDialog2.ShowDialog() = DialogResult.OK Then
+            getVideoFiles(Path.GetDirectoryName(OpenFileDialog2.FileName))
+            AxWindowsMediaPlayer1.URL = videoFiles(0)
+            AxWindowsMediaPlayer1.Ctlcontrols.pause()
         End If
     End Sub
 
@@ -44,15 +58,8 @@
                 Trace.WriteLine("■LOAD START = " & TxtLOGFILE.Text & " " & Now)
                 _objSENLOG = New Sen3Log(TxtLOGFILE.Text)
                 _tag = New Tag(Me, TxtLOGFILE.Text)
-
                 Trace.WriteLine("load tag")
-                _tag.add({27120, 3})
-                _tag.Add({30000, 34})
-                _tag.Add({35000, 4})
 
-                _tag.Add({60000, 4})
-                _tag.Add({80000, 42})
-                _tag.Add({85000, 2})
 
                 Trace.WriteLine("■LOAD END = " & TxtLOGFILE.Text & " " & Now)
 
@@ -128,6 +135,8 @@
 
     Private Sub NumericUpDown1_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NumericUpDown1.ValueChanged
         If Not IsNothing(_objSENLOG) Then
+            AxWindowsMediaPlayer1.Ctlcontrols.currentPosition = CDbl(NumericUpDown1.Value / 30)
+            AxWindowsMediaPlayer1.Ctlcontrols.pause()
             Lblサンプル位置.Text = String.Format("({0}) / {1:#,##0}({2})", GetTimeStringBySample(NumericUpDown1.Value), _objSENLOG.SampleCount, GetTimeStringBySample(_objSENLOG.SampleCount))
             LblP0.Text = "P0 : " & _objSENLOG.P0(NumericUpDown1.Value) - 128
             LblP1.Text = "P1 : " & _objSENLOG.P1(NumericUpDown1.Value) - 128
@@ -221,6 +230,52 @@
     Private Function _max(ByVal val1 As Integer, ByVal val2 As Integer) As Integer
         Return If(val1 > val2, val1, val2)
     End Function
+
+    Private Sub getSendatFiles(path As String)
+        sendatFiles.Clear()
+        Dim MyPath = path + "\*.sendat"  ' Set the path.
+        Dim MyName = Dir(MyPath, vbDirectory)   ' Retrieve the first entry.
+        Do While MyName <> ""   ' Start the loop.
+            ' Ignore the current directory and the encompassing directory.
+            If MyName <> "." And MyName <> ".." Then
+                sendatFiles.Add(path + "\" + MyName)
+                MyName = Dir()   ' Get next entry.
+            End If
+        Loop
+        sendatFiles.Sort()
+    End Sub
+
+    Private Sub getVideoFiles(path As String)
+        videoFiles.Clear()
+        Dim MyPath = path + "\*"  ' Set the path.
+        Dim MyName = Dir(MyPath, vbDirectory)   ' Retrieve the first entry.
+        Do While MyName <> ""   ' Start the loop.
+            ' Ignore the current directory and the encompassing directory.
+            If MyName <> "." And MyName <> ".." Then
+                videoFiles.Add(path + "\" + MyName)
+                MyName = Dir()   ' Get next entry.
+            End If
+        Loop
+        videoFiles.Sort()
+    End Sub
+
+    Private Sub nextSendat()
+        Dim current = sendatFiles.IndexOf(TxtLOGFILE.Text)
+        If current = sendatFiles.Count - 1 Then
+            MsgBox("No more next file")
+            Return
+        End If
+        TxtLOGFILE.Text = sendatFiles.Item(current + 1)
+    End Sub
+
+    Private Sub prevSendat()
+        Dim current = sendatFiles.IndexOf(TxtLOGFILE.Text)
+        If current = 0 Then
+            MsgBox("No more previous file")
+            Return
+        End If
+        TxtLOGFILE.Text = sendatFiles.Item(current - 1)
+    End Sub
 
     Private Sub PBoxVIEW_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles PBoxVIEW.Paint
         Dim wGyap As Integer = 6 + (PBoxVIEW.ClientSize.Height Mod 2)
@@ -338,7 +393,7 @@
         End If
     End Sub
 
-    Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
         Dim key = e.KeyCode
         If key = Keys.Delete Or key = Keys.X Then
             Trace.WriteLine("DELETE")
@@ -363,6 +418,10 @@
                 NumericUpDown1.Value = _tag.prevTag(NumericUpDown1.Value)
             Case Keys.X
                 NumericUpDown1.Value = _tag.delPrev(NumericUpDown1.Value)
+            Case Keys.K
+                nextSendat()
+            Case Keys.J
+                prevSendat()
         End Select
 
     End Sub
@@ -388,4 +447,5 @@
         Catch ex As Exception
         End Try
     End Sub
+
 End Class

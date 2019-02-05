@@ -39,6 +39,11 @@ Partial Class Form1
         Me.LblP1 = New System.Windows.Forms.Label()
         Me.LblW0 = New System.Windows.Forms.Label()
         Me.LblW1 = New System.Windows.Forms.Label()
+        Me.BtnVideoFile = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -65,9 +70,9 @@ Partial Class Form1
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(2, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 13)
+        Me.Label1.Size = New System.Drawing.Size(66, 13)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "ログファイル :"
+        Me.Label1.Text = "Sendat Path"
         '
         'BtnLOGFILE
         '
@@ -97,7 +102,7 @@ Partial Class Form1
         Me.Panel1.Location = New System.Drawing.Point(4, 89)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(905, 499)
+        Me.Panel1.Size = New System.Drawing.Size(905, 539)
         Me.Panel1.TabIndex = 15
         '
         'SplitContainer1
@@ -116,7 +121,7 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.AxWindowsMediaPlayer1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(894, 395)
+        Me.SplitContainer1.Size = New System.Drawing.Size(894, 435)
         Me.SplitContainer1.SplitterDistance = 510
         Me.SplitContainer1.SplitterWidth = 3
         Me.SplitContainer1.TabIndex = 22
@@ -129,28 +134,29 @@ Partial Class Form1
         Me.PBoxVIEW.Location = New System.Drawing.Point(0, 0)
         Me.PBoxVIEW.Margin = New System.Windows.Forms.Padding(0)
         Me.PBoxVIEW.Name = "PBoxVIEW"
-        Me.PBoxVIEW.Size = New System.Drawing.Size(510, 395)
+        Me.PBoxVIEW.Size = New System.Drawing.Size(510, 435)
         Me.PBoxVIEW.TabIndex = 19
         Me.PBoxVIEW.TabStop = False
         '
         'AxWindowsMediaPlayer1
         '
-        Me.AxWindowsMediaPlayer1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.AxWindowsMediaPlayer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(103, 451)
+        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(-1, 2)
         Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(332, 23)
-        Me.AxWindowsMediaPlayer1.TabIndex = 21
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(377, 431)
+        Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
         '
         Me.HScrollBar1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.HScrollBar1.LargeChange = 1
-        Me.HScrollBar1.Location = New System.Drawing.Point(0, 480)
+        Me.HScrollBar1.Location = New System.Drawing.Point(5, 520)
         Me.HScrollBar1.Maximum = 0
         Me.HScrollBar1.Name = "HScrollBar1"
         Me.HScrollBar1.Size = New System.Drawing.Size(905, 17)
@@ -173,7 +179,7 @@ Partial Class Form1
         'Lblサンプル位置
         '
         Me.Lblサンプル位置.AutoSize = True
-        Me.Lblサンプル位置.Location = New System.Drawing.Point(156, 38)
+        Me.Lblサンプル位置.Location = New System.Drawing.Point(158, 39)
         Me.Lblサンプル位置.Name = "Lblサンプル位置"
         Me.Lblサンプル位置.Size = New System.Drawing.Size(151, 13)
         Me.Lblサンプル位置.TabIndex = 18
@@ -181,7 +187,7 @@ Partial Class Form1
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(71, 36)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(73, 37)
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(79, 20)
         Me.NumericUpDown1.TabIndex = 19
@@ -190,7 +196,7 @@ Partial Class Form1
         'LblP0
         '
         Me.LblP0.AutoSize = True
-        Me.LblP0.Location = New System.Drawing.Point(383, 38)
+        Me.LblP0.Location = New System.Drawing.Point(385, 39)
         Me.LblP0.Name = "LblP0"
         Me.LblP0.Size = New System.Drawing.Size(49, 13)
         Me.LblP0.TabIndex = 20
@@ -199,7 +205,7 @@ Partial Class Form1
         'LblP1
         '
         Me.LblP1.AutoSize = True
-        Me.LblP1.Location = New System.Drawing.Point(452, 38)
+        Me.LblP1.Location = New System.Drawing.Point(454, 39)
         Me.LblP1.Name = "LblP1"
         Me.LblP1.Size = New System.Drawing.Size(49, 13)
         Me.LblP1.TabIndex = 21
@@ -208,7 +214,7 @@ Partial Class Form1
         'LblW0
         '
         Me.LblW0.AutoSize = True
-        Me.LblW0.Location = New System.Drawing.Point(524, 38)
+        Me.LblW0.Location = New System.Drawing.Point(526, 39)
         Me.LblW0.Name = "LblW0"
         Me.LblW0.Size = New System.Drawing.Size(53, 13)
         Me.LblW0.TabIndex = 22
@@ -217,17 +223,63 @@ Partial Class Form1
         'LblW1
         '
         Me.LblW1.AutoSize = True
-        Me.LblW1.Location = New System.Drawing.Point(597, 38)
+        Me.LblW1.Location = New System.Drawing.Point(599, 39)
         Me.LblW1.Name = "LblW1"
         Me.LblW1.Size = New System.Drawing.Size(53, 13)
         Me.LblW1.TabIndex = 23
         Me.LblW1.Text = "W1 : xxxx"
         '
+        'BtnVideoFile
+        '
+        Me.BtnVideoFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnVideoFile.Location = New System.Drawing.Point(770, 32)
+        Me.BtnVideoFile.Name = "BtnVideoFile"
+        Me.BtnVideoFile.Size = New System.Drawing.Size(33, 25)
+        Me.BtnVideoFile.TabIndex = 24
+        Me.BtnVideoFile.Text = "..."
+        Me.BtnVideoFile.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.Location = New System.Drawing.Point(876, 33)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(33, 25)
+        Me.Button2.TabIndex = 25
+        Me.Button2.Text = "..."
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(707, 39)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(59, 13)
+        Me.Label2.TabIndex = 26
+        Me.Label2.Text = "Video Path"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(820, 39)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(53, 13)
+        Me.Label3.TabIndex = 27
+        Me.Label3.Text = "CSV Path"
+        '
+        'OpenFileDialog2
+        '
+        Me.OpenFileDialog2.FileName = "OpenFileDialog1"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(912, 598)
+        Me.ClientSize = New System.Drawing.Size(912, 638)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.BtnVideoFile)
         Me.Controls.Add(Me.LblW1)
         Me.Controls.Add(Me.LblW0)
         Me.Controls.Add(Me.LblP1)
@@ -269,6 +321,11 @@ Partial Class Form1
     Friend WithEvents LblP1 As System.Windows.Forms.Label
     Friend WithEvents LblW0 As System.Windows.Forms.Label
     Friend WithEvents LblW1 As System.Windows.Forms.Label
-    Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents SplitContainer1 As SplitContainer
+    Friend WithEvents BtnVideoFile As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents OpenFileDialog2 As OpenFileDialog
+    Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
 End Class
