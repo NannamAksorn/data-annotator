@@ -176,4 +176,14 @@ Public Class Tag
             Return 0
         End Try
     End Function
+
+    Public Sub save(fileName As String)
+        IO.Directory.CreateDirectory("C:\Users\User\Desktop")
+        Dim w As New IO.StreamWriter("C:\Users\User\Desktop\" + fileName + ".csv")
+        Dim i As Integer
+        For i = 0 To _tagList.Count - 1
+            w.WriteLine(CType(_tagList(i)(0), String) + "," + CType(_tagList(i)(1), String))
+        Next
+        w.Close()
+    End Sub
 End Class
