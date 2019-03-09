@@ -15,8 +15,12 @@ Public Class Tag
         _form = form
         _strFilePath = strFilePath
         Close()
+        Dim key As Integer
+        Dim Index As Integer
         For Each line As String In System.IO.File.ReadAllLines(_strFilePath)
-            add(line.Split(","))
+            Index = Integer.Parse(line.Split(",").ElementAt(0))
+            key = Integer.Parse(line.Split(",").ElementAt(1))
+            add({Index, key})
         Next
     End Sub
 
@@ -64,10 +68,9 @@ Public Class Tag
         btn.Top = 70
         btn.Left = Form1._getWavePointX(data(0))
         btn.Size = New Size(20, 20)
-        If (data(1) \ 10 < 1) Then
-            btn.Text = data(1)
-        End If
-        If data(1) = 9 Then
+        btn.Text = data(1)
+
+        If data(1) >= 9 Then
             btn.Text = "T"
             btn.Top -= 10
         End If
@@ -180,4 +183,13 @@ Public Class Tag
             Return 0
         End Try
     End Function
+
+    Public Sub save(fileName As String)
+        Dim w As New IO.StreamWriter(_strFilePath)
+        Dim i As Integer
+        For i = 0 To _tagList.Count - 1
+            w.WriteLine(CType(_tagList(i)(0), String) + "," + CType(_tagList(i)(1), String))
+        Next
+        w.Close()
+    End Sub
 End Class

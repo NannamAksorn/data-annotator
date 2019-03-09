@@ -482,4 +482,8 @@ Public Class Form1
         End If
     End Sub
 
+
+    Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
+        _tag.save(System.IO.Path.GetFileName(OpenFileDialog1.FileName))
+    End Sub
 End Class

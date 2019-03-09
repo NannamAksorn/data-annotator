@@ -46,6 +46,7 @@ Partial Class Form1
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.lblTest = New System.Windows.Forms.Label()
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
+        Me.btn_save = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -113,7 +114,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitContainer1.Location = New System.Drawing.Point(5, 83)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -146,11 +147,11 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(-1, 2)
-        Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
+        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(-1, 0)
+        Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(379, 431)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(386, 435)
         Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
@@ -286,12 +287,22 @@ Partial Class Form1
         '
         Me.OpenFileDialog3.FileName = "OpenFileDialog1"
         '
+        'btn_save
+        '
+        Me.btn_save.Location = New System.Drawing.Point(9, 32)
+        Me.btn_save.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn_save.Name = "btn_save"
+        Me.btn_save.Size = New System.Drawing.Size(50, 22)
+        Me.btn_save.TabIndex = 28
+        Me.btn_save.Text = "save"
+        Me.btn_save.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(912, 638)
-        Me.Controls.Add(Me.lblTest)
+        Me.Controls.Add(Me.btn_save)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button2)
@@ -307,7 +318,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtLOGFILE)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MinimumSize = New System.Drawing.Size(639, 319)
+        Me.MinimumSize = New System.Drawing.Size(637, 313)
         Me.Name = "Form1"
         Me.Text = "センサーログビューア"
         Me.Panel1.ResumeLayout(False)
@@ -344,6 +355,9 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents OpenFileDialog2 As OpenFileDialog
     Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
+
     Friend WithEvents lblTest As Label
     Friend WithEvents OpenFileDialog3 As OpenFileDialog
+
+    Friend WithEvents btn_save As Button
 End Class

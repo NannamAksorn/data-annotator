@@ -34,6 +34,7 @@ Public Class Sen3Log
             Return isJudge
         End Get
     End Property
+
     Private Function parseDate(strFilePath As String) As Date
         strFilePath = strFilePath.Replace("-", "_")
         Dim match As Match = Regex.Match(strFilePath, "_(\d{4})(\d{2})(\d{2})_?(\d{2})_?(\d{2})_?(\d{2})")
@@ -66,6 +67,7 @@ Public Class Sen3Log
 
         Try
             _objFS = New FileStream(strFilePath, FileMode.Open)
+
             sdate = parseDate(strFilePath)
             If Form1.videoFiles.Count <= 0 Then
                 If Form1.OpenFileDialog2.ShowDialog() = DialogResult.OK Then
@@ -78,6 +80,7 @@ Public Class Sen3Log
                 End If
             End If
             setVideo()
+
             'センサーデータファイルをチェックする
             Dim packet(44) As Byte
             Dim nPacket As Integer = (_objFS.Length / packet.Length)
