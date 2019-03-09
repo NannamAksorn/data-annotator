@@ -6,7 +6,8 @@ Public Class Form1
     Private Const VIEW_GYAP As Integer = 10
 
     Private sendatFiles As ArrayList = New ArrayList
-    Private videoFiles As ArrayList = New ArrayList
+    Public videoFiles As ArrayList = New ArrayList
+    Public csvFiles As ArrayList = New ArrayList
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         OpenFileDialog1.FileName = ""
@@ -55,13 +56,18 @@ Public Class Form1
         Try
             If Not String.IsNullOrEmpty(TxtLOGFILE.Text) Then
                 Me.Cursor = Cursors.WaitCursor
-                Trace.WriteLine("■LOAD START = " & TxtLOGFILE.Text & " " & Now)
+                '  Trace.WriteLine("■LOAD START = " & TxtLOGFILE.Text & " " & Now)
                 _objSENLOG = New Sen3Log(TxtLOGFILE.Text)
-                _tag = New Tag(Me, TxtLOGFILE.Text)
-                Trace.WriteLine("load tag")
+                Dim current = sendatFiles.IndexOf(TxtLOGFILE.Text)
+                If current = sendatFiles.Count - 1 Then
+                    MsgBox("No more next file")
+                    Return
+                End If
+                _tag = New Tag(Me, csvFiles.Item(current))
+                '  Trace.WriteLine("load tag")
 
 
-                Trace.WriteLine("■LOAD END = " & TxtLOGFILE.Text & " " & Now)
+                ' Trace.WriteLine("■LOAD END = " & TxtLOGFILE.Text & " " & Now)
 
             End If
 
@@ -70,7 +76,7 @@ Public Class Form1
             PBoxWAVE.Visible = True
             NumericUpDown1_ValueChanged(sender, e)
         Catch ex As Exception
-            Trace.WriteLine("例外:" + ex.Message)
+            '  Trace.WriteLine("例外:" + ex.Message)
             MsgBox("ファイルを開けませんでした。[" & ex.Message & "]")
             If Not IsNothing(_objSENLOG) Then
                 _objSENLOG.Close()
@@ -135,7 +141,8 @@ Public Class Form1
 
     Private Sub NumericUpDown1_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NumericUpDown1.ValueChanged
         If Not IsNothing(_objSENLOG) Then
-            AxWindowsMediaPlayer1.Ctlcontrols.currentPosition = CDbl(NumericUpDown1.Value / 30)
+            AxWindowsMediaPlayer1.Ctlcontrols.currentPosition = CDbl(NumericUpDown1.Value / 30) + _objSENLOG.diff
+            AxWindowsMediaPlayer1.Ctlcontrols.play()
             AxWindowsMediaPlayer1.Ctlcontrols.pause()
             Lblサンプル位置.Text = String.Format("({0}) / {1:#,##0}({2})", GetTimeStringBySample(NumericUpDown1.Value), _objSENLOG.SampleCount, GetTimeStringBySample(_objSENLOG.SampleCount))
             LblP0.Text = "P0 : " & _objSENLOG.P0(NumericUpDown1.Value) - 128
@@ -157,7 +164,7 @@ Public Class Form1
         Dim wGyap As Integer = 3 + (PBoxWAVE.ClientSize.Height Mod 2)
         Dim wHeight As Integer = (PBoxWAVE.ClientSize.Height - wGyap) / 3
 
-        Trace.WriteLine("■PBoxWAVE_Paint START  " & Now)
+        'Trace.WriteLine("■PBoxWAVE_Paint START  " & Now)
         'Trace.WriteLine("ClientSize = " & PBoxWAVE.ClientSize.Width & ", " & PBoxWAVE.ClientSize.Height)
         'Trace.WriteLine("Size       = " & PBoxWAVE.Width & ", " & PBoxWAVE.Height)
 
@@ -167,7 +174,7 @@ Public Class Form1
         '枠
         Dim pt As New Point(_getWavePointX(HScrollBar1.Value), 0)
         Dim sz As New Size(_getWavePointX(_min(_objSENLOG.SampleCount, PBoxVIEW.ClientSize.Width)), PBoxWAVE.ClientSize.Height - 1)
-        Trace.WriteLine("枠 pos=(" & pt.X & ", " & pt.Y & ") size=(" & sz.Width & ", " & sz.Height & ")")
+        'Trace.WriteLine("枠 pos=(" & pt.X & ", " & pt.Y & ") size=(" & sz.Width & ", " & sz.Height & ")")
         e.Graphics.FillRectangle(Brushes.Black, pt.X, pt.Y, sz.Width, sz.Height)
         e.Graphics.DrawRectangle(Pens.Azure, pt.X, pt.Y, sz.Width, sz.Height)
 
@@ -245,14 +252,35 @@ Public Class Form1
         sendatFiles.Sort()
     End Sub
 
-    Private Sub getVideoFiles(path As String)
+    Public Sub getCSVFiles(path As String)
+        Dim sendat_name As String
+        Dim MyPath
+        Dim MyName
+        csvFiles.Clear()
+        For Each sendatFile As String In sendatFiles
+            sendat_name = System.IO.Path.GetFileNameWithoutExtension(sendatFile)
+            MyPath = path + "\*" + sendat_name + "*.csv"  ' Set the path.
+            MyName = Dir(MyPath, vbDirectory)   ' Retrieve the first entry.
+            If MyName <> "" Then
+                csvFiles.Add(path + "\" + MyName)
+            Else
+                File.Create(path + "\" + sendat_name + ".csv").Dispose()
+            End If
+        Next
+        Trace.WriteLine(csvFiles.Count)
+        csvFiles.Sort()
+    End Sub
+
+    Public Sub getVideoFiles(path As String)
         videoFiles.Clear()
         Dim MyPath = path + "\*"  ' Set the path.
         Dim MyName = Dir(MyPath, vbDirectory)   ' Retrieve the first entry.
         Do While MyName <> ""   ' Start the loop.
             ' Ignore the current directory and the encompassing directory.
             If MyName <> "." And MyName <> ".." Then
-                videoFiles.Add(path + "\" + MyName)
+                If MyName.EndsWith(".mp4") Or MyName.EndsWith(".asf") Then
+                    videoFiles.Add(path + "\" + MyName)
+                End If
                 MyName = Dir()   ' Get next entry.
             End If
         Loop
@@ -446,6 +474,12 @@ Public Class Form1
             End If
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If OpenFileDialog3.ShowDialog() = DialogResult.OK Then
+            getCSVFiles(Path.GetDirectoryName(OpenFileDialog3.FileName))
+        End If
     End Sub
 
 End Class

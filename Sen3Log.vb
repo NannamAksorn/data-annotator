@@ -8,7 +8,8 @@ Public Class Sen3Log
     Private arrP1() As Byte
     Private arrW0() As Byte
     Private arrW1() As Byte
-    Private time As Date
+    Private sdate As Date
+    Public diff As Integer = 0
 
     Public Shared ReadOnly Property IsLogFile(ByVal strFilePath As String) As Boolean
         Get
@@ -33,11 +34,30 @@ Public Class Sen3Log
             Return isJudge
         End Get
     End Property
-    Private Function parseDate(strFilePath As String)
-        Dim match As Match = Regex.Matches(strFilePath, "_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})")
+    Private Function parseDate(strFilePath As String) As Date
+        strFilePath = strFilePath.Replace("-", "_")
+        Dim match As Match = Regex.Match(strFilePath, "_(\d{4})(\d{2})(\d{2})_?(\d{2})_?(\d{2})_?(\d{2})")
         If match.Success Then
-            Console.WriteLine(match.Groups[1].value)
+            Dim year = match.Groups.Item(1).Value
+            year = Integer.Parse(year)
+            If year > 2500 Then
+                year = year - 543
+            End If
+            Dim month = match.Groups.Item(2).Value
+            month = Integer.Parse(month)
+            Dim day = match.Groups.Item(3).Value
+            day = Integer.Parse(day)
+            Dim hour = match.Groups.Item(4).Value
+            hour = Integer.Parse(hour)
+            Dim min = match.Groups.Item(5).Value
+            min = Integer.Parse(min)
+            Dim sec = match.Groups.Item(6).Value
+            sec = Integer.Parse(sec)
+            Dim pdate As Date = New Date(year, month, day, hour, min, sec)
+            Form1.lblTest.Text = pdate.ToString
+            Return pdate
         End If
+        Return Nothing
     End Function
 
 
@@ -46,7 +66,18 @@ Public Class Sen3Log
 
         Try
             _objFS = New FileStream(strFilePath, FileMode.Open)
-            parseDate(strFilePath)
+            sdate = parseDate(strFilePath)
+            If Form1.videoFiles.Count <= 0 Then
+                If Form1.OpenFileDialog2.ShowDialog() = DialogResult.OK Then
+                    Form1.getVideoFiles(Path.GetDirectoryName(Form1.OpenFileDialog2.FileName))
+                End If
+            End If
+            If Form1.csvFiles.Count <= 0 Then
+                If Form1.OpenFileDialog3.ShowDialog() = DialogResult.OK Then
+                    Form1.getCSVFiles(Path.GetDirectoryName(Form1.OpenFileDialog3.FileName))
+                End If
+            End If
+            setVideo()
             'センサーデータファイルをチェックする
             Dim packet(44) As Byte
             Dim nPacket As Integer = (_objFS.Length / packet.Length)
@@ -76,6 +107,32 @@ Public Class Sen3Log
             Close()
             Throw ex
         End Try
+    End Sub
+
+    Private Sub setVideo()
+        Dim vdate As Date
+        Dim video_current As String = ""
+        Dim videoFiles = Form1.videoFiles
+        For i As Integer = 0 To videoFiles.Count - 1
+            Dim video_name = videoFiles.Item(i)
+            vdate = parseDate(video_name)
+            video_current = video_name
+            diff = sdate.Subtract(vdate).TotalSeconds
+            If diff < -3600 Then
+                If i <> 0 Then
+                    video_name = videoFiles.Item(i - 1)
+                    vdate = parseDate(video_name)
+                    video_current = video_name
+                    diff = sdate.Subtract(vdate).TotalSeconds
+                End If
+                Exit For
+            End If
+        Next
+        Form1.lblTest.Text = diff
+
+        If video_current <> "" Then
+            Form1.AxWindowsMediaPlayer1.URL = video_current
+        End If
     End Sub
 
 

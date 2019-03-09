@@ -44,6 +44,8 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
+        Me.lblTest = New System.Windows.Forms.Label()
+        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -148,7 +150,7 @@ Partial Class Form1
         Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(377, 431)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(379, 431)
         Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
@@ -271,11 +273,25 @@ Partial Class Form1
         '
         Me.OpenFileDialog2.FileName = "OpenFileDialog1"
         '
+        'lblTest
+        '
+        Me.lblTest.AutoSize = True
+        Me.lblTest.Location = New System.Drawing.Point(428, 62)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(24, 13)
+        Me.lblTest.TabIndex = 28
+        Me.lblTest.Text = "test"
+        '
+        'OpenFileDialog3
+        '
+        Me.OpenFileDialog3.FileName = "OpenFileDialog1"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(912, 638)
+        Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button2)
@@ -328,4 +344,6 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents OpenFileDialog2 As OpenFileDialog
     Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
+    Friend WithEvents lblTest As Label
+    Friend WithEvents OpenFileDialog3 As OpenFileDialog
 End Class

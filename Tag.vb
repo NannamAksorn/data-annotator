@@ -6,14 +6,18 @@ Public Class Tag
     Private _tagList As New ArrayList
     Private _buttonList As New ArrayList
     Private _form As Form
-
+    Private _strFilePath As String
 
     Private _undostack As Stack = New Stack()
     Private _redostack As Stack = New Stack()
 
     Public Sub New(ByVal form As Form, ByVal strFilePath As String)
         _form = form
+        _strFilePath = strFilePath
         Close()
+        For Each line As String In System.IO.File.ReadAllLines(_strFilePath)
+            add(line.Split(","))
+        Next
     End Sub
 
     Public Sub Close()
