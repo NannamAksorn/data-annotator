@@ -70,11 +70,13 @@ Public Class Sen3Log
 
             sdate = parseDate(strFilePath)
             If Form1.videoFiles.Count <= 0 Then
+                Form1.lblLastCommand.Text = "Please Open Video File"
                 If Form1.OpenFileDialog2.ShowDialog() = DialogResult.OK Then
                     Form1.getVideoFiles(Path.GetDirectoryName(Form1.OpenFileDialog2.FileName))
                 End If
             End If
             If Form1.csvFiles.Count <= 0 Then
+                Form1.lblLastCommand.Text = "Please Open CSV File"
                 If Form1.OpenFileDialog3.ShowDialog() = DialogResult.OK Then
                     Form1.getCSVFiles(Path.GetDirectoryName(Form1.OpenFileDialog3.FileName))
                 End If
@@ -121,7 +123,7 @@ Public Class Sen3Log
             vdate = parseDate(video_name)
             video_current = video_name
             diff = sdate.Subtract(vdate).TotalSeconds
-            If diff < -3600 Then
+            If diff <= -3600 Then
                 If i <> 0 Then
                     video_name = videoFiles.Item(i - 1)
                     vdate = parseDate(video_name)

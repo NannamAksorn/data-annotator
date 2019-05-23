@@ -47,6 +47,7 @@ Partial Class Form1
         Me.lblTest = New System.Windows.Forms.Label()
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.btn_save = New System.Windows.Forms.Button()
+        Me.lblLastCommand = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -71,6 +72,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Location = New System.Drawing.Point(2, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(66, 13)
@@ -114,7 +116,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitContainer1.Location = New System.Drawing.Point(5, 83)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -148,10 +150,10 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AxWindowsMediaPlayer1.Enabled = True
         Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(-1, 0)
-        Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(386, 435)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(389, 435)
         Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
@@ -182,6 +184,7 @@ Partial Class Form1
         'Lblサンプル位置
         '
         Me.Lblサンプル位置.AutoSize = True
+        Me.Lblサンプル位置.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Lblサンプル位置.Location = New System.Drawing.Point(158, 39)
         Me.Lblサンプル位置.Name = "Lblサンプル位置"
         Me.Lblサンプル位置.Size = New System.Drawing.Size(151, 13)
@@ -199,6 +202,7 @@ Partial Class Form1
         'LblP0
         '
         Me.LblP0.AutoSize = True
+        Me.LblP0.ForeColor = System.Drawing.SystemColors.Desktop
         Me.LblP0.Location = New System.Drawing.Point(385, 39)
         Me.LblP0.Name = "LblP0"
         Me.LblP0.Size = New System.Drawing.Size(49, 13)
@@ -208,6 +212,7 @@ Partial Class Form1
         'LblP1
         '
         Me.LblP1.AutoSize = True
+        Me.LblP1.ForeColor = System.Drawing.SystemColors.Desktop
         Me.LblP1.Location = New System.Drawing.Point(454, 39)
         Me.LblP1.Name = "LblP1"
         Me.LblP1.Size = New System.Drawing.Size(49, 13)
@@ -217,6 +222,7 @@ Partial Class Form1
         'LblW0
         '
         Me.LblW0.AutoSize = True
+        Me.LblW0.ForeColor = System.Drawing.SystemColors.Desktop
         Me.LblW0.Location = New System.Drawing.Point(526, 39)
         Me.LblW0.Name = "LblW0"
         Me.LblW0.Size = New System.Drawing.Size(53, 13)
@@ -226,6 +232,8 @@ Partial Class Form1
         'LblW1
         '
         Me.LblW1.AutoSize = True
+        Me.LblW1.BackColor = System.Drawing.Color.Transparent
+        Me.LblW1.ForeColor = System.Drawing.SystemColors.Desktop
         Me.LblW1.Location = New System.Drawing.Point(599, 39)
         Me.LblW1.Name = "LblW1"
         Me.LblW1.Size = New System.Drawing.Size(53, 13)
@@ -254,7 +262,10 @@ Partial Class Form1
         '
         'Label2
         '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Desktop
         Me.Label2.Location = New System.Drawing.Point(707, 39)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(59, 13)
@@ -264,6 +275,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.SystemColors.Desktop
         Me.Label3.Location = New System.Drawing.Point(820, 39)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(53, 13)
@@ -290,18 +302,32 @@ Partial Class Form1
         'btn_save
         '
         Me.btn_save.Location = New System.Drawing.Point(9, 32)
-        Me.btn_save.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn_save.Margin = New System.Windows.Forms.Padding(2)
         Me.btn_save.Name = "btn_save"
         Me.btn_save.Size = New System.Drawing.Size(50, 22)
         Me.btn_save.TabIndex = 28
         Me.btn_save.Text = "save"
         Me.btn_save.UseVisualStyleBackColor = True
         '
+        'lblLastCommand
+        '
+        Me.lblLastCommand.AutoSize = True
+        Me.lblLastCommand.BackColor = System.Drawing.Color.Black
+        Me.lblLastCommand.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblLastCommand.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.lblLastCommand.Location = New System.Drawing.Point(13, 61)
+        Me.lblLastCommand.Name = "lblLastCommand"
+        Me.lblLastCommand.Size = New System.Drawing.Size(181, 16)
+        Me.lblLastCommand.TabIndex = 29
+        Me.lblLastCommand.Text = "Please Open Sendat File"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.LightGray
         Me.ClientSize = New System.Drawing.Size(912, 638)
+        Me.Controls.Add(Me.lblLastCommand)
         Me.Controls.Add(Me.btn_save)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -320,7 +346,7 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(637, 313)
         Me.Name = "Form1"
-        Me.Text = "センサーログビューア"
+        Me.Text = "Data Annotator"
         Me.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -360,4 +386,5 @@ Partial Class Form1
     Friend WithEvents OpenFileDialog3 As OpenFileDialog
 
     Friend WithEvents btn_save As Button
+    Friend WithEvents lblLastCommand As Label
 End Class

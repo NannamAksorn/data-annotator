@@ -6,7 +6,7 @@ Public Class Tag
     Private _tagList As New ArrayList
     Private _buttonList As New ArrayList
     Private _form As Form
-    Private _strFilePath As String
+    Public _strFilePath As String
 
     Private _undostack As Stack = New Stack()
     Private _redostack As Stack = New Stack()
@@ -70,7 +70,7 @@ Public Class Tag
         btn.Size = New Size(20, 20)
         btn.Text = data(1)
 
-        If data(1) >= 9 Then
+        If data(1) = 0 Then
             btn.Text = "T"
             btn.Top -= 10
         End If

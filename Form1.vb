@@ -18,6 +18,7 @@ Public Class Form1
     Private Sub BtnLOGFILE_Click(sender As System.Object, e As System.EventArgs) Handles BtnLOGFILE.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             getSendatFiles(Path.GetDirectoryName(OpenFileDialog1.FileName))
+            lblLastCommand.Text = "Opened " + OpenFileDialog1.FileName
             TxtLOGFILE.Text = OpenFileDialog1.FileName
         End If
     End Sub
@@ -387,7 +388,7 @@ Public Class Form1
     Private Function getColor(ByVal key As Integer) As Brush
         Dim brush As Brush
         Select Case key
-            Case 0
+            Case 9
                 brush = Brushes.Transparent
             Case 1
                 brush = Brushes.Gray
@@ -427,29 +428,42 @@ Public Class Form1
             Trace.WriteLine("DELETE")
         ElseIf key = Keys.G Then
             NumericUpDown1.Value = 0
+            lblLastCommand.Text = "(G) Goto beginning"
             If e.Modifiers = Keys.Shift Then
+                lblLastCommand.Text = "(Shift - G) Goto End"
                 NumericUpDown1.Value = _objSENLOG.SampleCount - 1
             End If
         End If
         Select Case key
             Case Keys.U
                 NumericUpDown1.Value = _tag.undo()
+                lblLastCommand.Text = "(U) Undo <- "
             Case Keys.R
                 NumericUpDown1.Value = _tag.redo()
+                lblLastCommand.Text = "(R) Redo -> "
             Case Keys.Z
                 If e.Modifiers = Keys.Control Then
                     NumericUpDown1.Value = _tag.undo()
+                    lblLastCommand.Text = "(U) Undo <- "
                 End If
             Case Keys.L
                 NumericUpDown1.Value = _tag.nextTag(NumericUpDown1.Value)
+                lblLastCommand.Text = "(L) Next Tag -> "
             Case Keys.H
                 NumericUpDown1.Value = _tag.prevTag(NumericUpDown1.Value)
+                lblLastCommand.Text = "(H) Prev Tag <- "
             Case Keys.X
                 NumericUpDown1.Value = _tag.delPrev(NumericUpDown1.Value)
+                lblLastCommand.Text = "(X) Deleted"
             Case Keys.K
                 nextSendat()
+                lblLastCommand.Text = "(K) Open Next file -> " + _tag._strFilePath
             Case Keys.J
                 prevSendat()
+                lblLastCommand.Text = "(J) Open Prev file <- " + _tag._strFilePath
+            Case Keys.S
+                _tag.save(System.IO.Path.GetFileName(OpenFileDialog1.FileName))
+                lblLastCommand.Text = "(S) Saved " + _tag._strFilePath
         End Select
 
     End Sub
