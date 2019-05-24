@@ -30,6 +30,7 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.PBoxVIEW = New System.Windows.Forms.PictureBox()
+        Me.lblNoVideo = New System.Windows.Forms.Label()
         Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
         Me.HScrollBar1 = New System.Windows.Forms.HScrollBar()
         Me.PBoxWAVE = New System.Windows.Forms.PictureBox()
@@ -44,7 +45,6 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
-        Me.lblTest = New System.Windows.Forms.Label()
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.btn_save = New System.Windows.Forms.Button()
         Me.lblLastCommand = New System.Windows.Forms.Label()
@@ -125,6 +125,7 @@ Partial Class Form1
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.lblNoVideo)
         Me.SplitContainer1.Panel2.Controls.Add(Me.AxWindowsMediaPlayer1)
         Me.SplitContainer1.Size = New System.Drawing.Size(894, 435)
         Me.SplitContainer1.SplitterDistance = 510
@@ -143,6 +144,18 @@ Partial Class Form1
         Me.PBoxVIEW.TabIndex = 19
         Me.PBoxVIEW.TabStop = False
         '
+        'lblNoVideo
+        '
+        Me.lblNoVideo.AutoSize = True
+        Me.lblNoVideo.BackColor = System.Drawing.Color.Black
+        Me.lblNoVideo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblNoVideo.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.lblNoVideo.Location = New System.Drawing.Point(156, 190)
+        Me.lblNoVideo.Name = "lblNoVideo"
+        Me.lblNoVideo.Size = New System.Drawing.Size(73, 16)
+        Me.lblNoVideo.TabIndex = 30
+        Me.lblNoVideo.Text = "No Video"
+        '
         'AxWindowsMediaPlayer1
         '
         Me.AxWindowsMediaPlayer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -153,7 +166,7 @@ Partial Class Form1
         Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(389, 435)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(391, 435)
         Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
@@ -286,15 +299,6 @@ Partial Class Form1
         '
         Me.OpenFileDialog2.FileName = "OpenFileDialog1"
         '
-        'lblTest
-        '
-        Me.lblTest.AutoSize = True
-        Me.lblTest.Location = New System.Drawing.Point(428, 62)
-        Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(24, 13)
-        Me.lblTest.TabIndex = 28
-        Me.lblTest.Text = "test"
-        '
         'OpenFileDialog3
         '
         Me.OpenFileDialog3.FileName = "OpenFileDialog1"
@@ -350,6 +354,7 @@ Partial Class Form1
         Me.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.PBoxVIEW, System.ComponentModel.ISupportInitialize).EndInit()
@@ -382,9 +387,9 @@ Partial Class Form1
     Friend WithEvents OpenFileDialog2 As OpenFileDialog
     Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
 
-    Friend WithEvents lblTest As Label
     Friend WithEvents OpenFileDialog3 As OpenFileDialog
 
     Friend WithEvents btn_save As Button
     Friend WithEvents lblLastCommand As Label
+    Friend WithEvents lblNoVideo As Label
 End Class

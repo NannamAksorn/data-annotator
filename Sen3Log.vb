@@ -55,7 +55,6 @@ Public Class Sen3Log
             Dim sec = match.Groups.Item(6).Value
             sec = Integer.Parse(sec)
             Dim pdate As Date = New Date(year, month, day, hour, min, sec)
-            Form1.lblTest.Text = pdate.ToString
             Return pdate
         End If
         Return Nothing
@@ -118,6 +117,7 @@ Public Class Sen3Log
         Dim vdate As Date
         Dim video_current As String = ""
         Dim videoFiles = Form1.videoFiles
+        Dim Found As Boolean = False
         For i As Integer = 0 To videoFiles.Count - 1
             Dim video_name = videoFiles.Item(i)
             vdate = parseDate(video_name)
@@ -125,6 +125,7 @@ Public Class Sen3Log
             diff = sdate.Subtract(vdate).TotalSeconds
             If diff <= -3600 Then
                 If i <> 0 Then
+                    Found = True
                     video_name = videoFiles.Item(i - 1)
                     vdate = parseDate(video_name)
                     video_current = video_name
@@ -133,11 +134,18 @@ Public Class Sen3Log
                 Exit For
             End If
         Next
-        Form1.lblTest.Text = diff
 
         If video_current <> "" Then
             Form1.AxWindowsMediaPlayer1.URL = video_current
+            Form1.AxWindowsMediaPlayer1.Ctlcontrols.play()
+            Form1.AxWindowsMediaPlayer1.Ctlcontrols.pause()
         End If
+        If Found = False Or diff > 10000 Then
+            Form1.lblNoVideo.Visible = True
+        Else
+            Form1.lblNoVideo.Visible = False
+        End If
+
     End Sub
 
 

@@ -500,4 +500,8 @@ Public Class Form1
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
         _tag.save(System.IO.Path.GetFileName(OpenFileDialog1.FileName))
     End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) 
+
+    End Sub
 End Class
