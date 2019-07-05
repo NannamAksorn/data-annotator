@@ -60,15 +60,12 @@ Public Class Form1
                 '  Trace.WriteLine("■LOAD START = " & TxtLOGFILE.Text & " " & Now)
                 _objSENLOG = New Sen3Log(TxtLOGFILE.Text)
                 Dim current = sendatFiles.IndexOf(TxtLOGFILE.Text)
-                If current = sendatFiles.Count - 1 Then
+                If current = sendatFiles.Count Then
                     MsgBox("No more next file")
                     Return
                 End If
+                Trace.WriteLine(csvFiles.Item(current))
                 _tag = New Tag(Me, csvFiles.Item(current))
-                '  Trace.WriteLine("load tag")
-
-
-                ' Trace.WriteLine("■LOAD END = " & TxtLOGFILE.Text & " " & Now)
 
             End If
 
@@ -77,7 +74,7 @@ Public Class Form1
             PBoxWAVE.Visible = True
             NumericUpDown1_ValueChanged(sender, e)
         Catch ex As Exception
-            '  Trace.WriteLine("例外:" + ex.Message)
+            Trace.WriteLine("例外:" + ex.Message)
             MsgBox("ファイルを開けませんでした。[" & ex.Message & "]")
             If Not IsNothing(_objSENLOG) Then
                 _objSENLOG.Close()
@@ -335,6 +332,9 @@ Public Class Form1
         Dim endPos As Integer = _min(HScrollBar1.Value + e.ClipRectangle.Right, _objSENLOG.SampleCount - 1)
 
         Dim x1, x2 As Integer
+        If IsNothing(_tag) Then
+            Return
+        End If
         Dim tag As ArrayList = _tag.list
         Dim index As Integer, nextIndex As Integer
         Dim key As Integer
@@ -457,7 +457,10 @@ Public Class Form1
                 lblLastCommand.Text = "(X) Deleted"
             Case Keys.K
                 nextSendat()
-                lblLastCommand.Text = "(K) Open Next file -> " + _tag._strFilePath
+                If Not IsNothing(_tag) Then
+                    lblLastCommand.Text = "(K) Open Next file -> " + _tag._strFilePath
+                End If
+
             Case Keys.J
                 prevSendat()
                 lblLastCommand.Text = "(J) Open Prev file <- " + _tag._strFilePath

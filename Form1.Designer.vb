@@ -93,6 +93,7 @@ Partial Class Form1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         Me.OpenFileDialog1.Filter = "ログファイル|*.sendat|すべてのファイル|*.*"""
+        Me.OpenFileDialog1.Title = "open sendat"
         '
         'Panel1
         '
@@ -166,7 +167,7 @@ Partial Class Form1
         Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(391, 435)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(392, 435)
         Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
@@ -298,10 +299,13 @@ Partial Class Form1
         'OpenFileDialog2
         '
         Me.OpenFileDialog2.FileName = "OpenFileDialog1"
+        Me.OpenFileDialog2.Title = "open video"
         '
         'OpenFileDialog3
         '
         Me.OpenFileDialog3.FileName = "OpenFileDialog1"
+        Me.OpenFileDialog3.Filter = "csv|*.csv"
+        Me.OpenFileDialog3.Title = "open csv"
         '
         'btn_save
         '
