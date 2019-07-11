@@ -416,6 +416,14 @@ Public Class Form1
     Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         If e.KeyChar >= "0" And e.KeyChar <= "9" Then
             Dim key As Integer = Integer.Parse(e.KeyChar)
+            If key = 8 Then
+                Dim output = InputBox("Special Tag", "Enter Tag", "Please Enter Tag")
+                If Integer.TryParse(output, key) Then
+                    key = output
+                Else
+                    key = 0
+                End If
+            End If
             Dim Index As Integer = NumericUpDown1.Value
             _tag.add({Index, key})
             MyBase.Refresh()
@@ -493,7 +501,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btn_help.Click
         If OpenFileDialog3.ShowDialog() = DialogResult.OK Then
             getCSVFiles(Path.GetDirectoryName(OpenFileDialog3.FileName))
         End If
@@ -504,7 +512,23 @@ Public Class Form1
         _tag.save(System.IO.Path.GetFileName(OpenFileDialog1.FileName))
     End Sub
 
-    Private Sub Label4_Click(sender As Object, e As EventArgs) 
-
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        MsgBox("1.Press Top ... button" + Constants.vbCrLf + Constants.vbCrLf +
+               " 1.1 Select any file inside folder containing .sendat fies" + Constants.vbCrLf + Constants.vbCrLf +
+               " 1.2 Select any file inside folder containing video files" + Constants.vbCrLf + Constants.vbCrLf +
+               " 1.3 Select any file inside folder containing .csv files" + Constants.vbCrLf + Constants.vbCrLf +
+               "2 Press number 1,2,3,4,5,9 according to current posture" + Constants.vbCrLf + Constants.vbCrLf +
+               " 2.1 Press number 0 for transition (join tag before and after ignoring 9 EX. 2, (23), 9 , 3)" + Constants.vbCrLf + Constants.vbCrLf +
+               " 2.2 Press number 8 for special transition (input box will appear, Entere any combination EX. 2, (29), (93) , 3)" + Constants.vbCrLf + Constants.vbCrLf +
+               " 2.3 Click on number box to delete number" + Constants.vbCrLf + Constants.vbCrLf +
+               "3 Shortcuts" + Constants.vbCrLf + Constants.vbCrLf +
+               "j,k to open previous, next sendat file" + Constants.vbCrLf + Constants.vbCrLf +
+               "h,l to goto previous, next tag" + Constants.vbCrLf + Constants.vbCrLf +
+               "g,G to goto beginning, end location" + Constants.vbCrLf + Constants.vbCrLf +
+               "u,r to undo, redo" + Constants.vbCrLf + Constants.vbCrLf +
+               "ctrl+z also undo" + Constants.vbCrLf + Constants.vbCrLf +
+               "s to save" + Constants.vbCrLf + Constants.vbCrLf +
+               "x to delete current tag" + Constants.vbCrLf + Constants.vbCrLf,
+               MsgBoxStyle.Information, "Help")
     End Sub
 End Class

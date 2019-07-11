@@ -41,13 +41,14 @@ Partial Class Form1
         Me.LblW0 = New System.Windows.Forms.Label()
         Me.LblW1 = New System.Windows.Forms.Label()
         Me.BtnVideoFile = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btn_help = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.btn_save = New System.Windows.Forms.Button()
         Me.lblLastCommand = New System.Windows.Forms.Label()
+        Me.btnHelp = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -167,7 +168,7 @@ Partial Class Form1
         Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(392, 435)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(396, 435)
         Me.AxWindowsMediaPlayer1.TabIndex = 22
         '
         'HScrollBar1
@@ -217,7 +218,7 @@ Partial Class Form1
         '
         Me.LblP0.AutoSize = True
         Me.LblP0.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.LblP0.Location = New System.Drawing.Point(385, 39)
+        Me.LblP0.Location = New System.Drawing.Point(317, 38)
         Me.LblP0.Name = "LblP0"
         Me.LblP0.Size = New System.Drawing.Size(49, 13)
         Me.LblP0.TabIndex = 20
@@ -227,7 +228,7 @@ Partial Class Form1
         '
         Me.LblP1.AutoSize = True
         Me.LblP1.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.LblP1.Location = New System.Drawing.Point(454, 39)
+        Me.LblP1.Location = New System.Drawing.Point(386, 38)
         Me.LblP1.Name = "LblP1"
         Me.LblP1.Size = New System.Drawing.Size(49, 13)
         Me.LblP1.TabIndex = 21
@@ -237,7 +238,7 @@ Partial Class Form1
         '
         Me.LblW0.AutoSize = True
         Me.LblW0.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.LblW0.Location = New System.Drawing.Point(526, 39)
+        Me.LblW0.Location = New System.Drawing.Point(458, 38)
         Me.LblW0.Name = "LblW0"
         Me.LblW0.Size = New System.Drawing.Size(53, 13)
         Me.LblW0.TabIndex = 22
@@ -248,7 +249,7 @@ Partial Class Form1
         Me.LblW1.AutoSize = True
         Me.LblW1.BackColor = System.Drawing.Color.Transparent
         Me.LblW1.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.LblW1.Location = New System.Drawing.Point(599, 39)
+        Me.LblW1.Location = New System.Drawing.Point(531, 38)
         Me.LblW1.Name = "LblW1"
         Me.LblW1.Size = New System.Drawing.Size(53, 13)
         Me.LblW1.TabIndex = 23
@@ -264,15 +265,15 @@ Partial Class Form1
         Me.BtnVideoFile.Text = "..."
         Me.BtnVideoFile.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btn_help
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(876, 33)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(33, 25)
-        Me.Button2.TabIndex = 25
-        Me.Button2.Text = "..."
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btn_help.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_help.Location = New System.Drawing.Point(876, 33)
+        Me.btn_help.Name = "btn_help"
+        Me.btn_help.Size = New System.Drawing.Size(33, 25)
+        Me.btn_help.TabIndex = 25
+        Me.btn_help.Text = "..."
+        Me.btn_help.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -329,17 +330,27 @@ Partial Class Form1
         Me.lblLastCommand.TabIndex = 29
         Me.lblLastCommand.Text = "Please Open Sendat File"
         '
+        'btnHelp
+        '
+        Me.btnHelp.Location = New System.Drawing.Point(606, 33)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(64, 21)
+        Me.btnHelp.TabIndex = 30
+        Me.btnHelp.Text = "Help"
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightGray
         Me.ClientSize = New System.Drawing.Size(912, 638)
+        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.lblLastCommand)
         Me.Controls.Add(Me.btn_save)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btn_help)
         Me.Controls.Add(Me.BtnVideoFile)
         Me.Controls.Add(Me.LblW1)
         Me.Controls.Add(Me.LblW0)
@@ -385,7 +396,7 @@ Partial Class Form1
     Friend WithEvents LblW1 As System.Windows.Forms.Label
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents BtnVideoFile As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btn_help As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents OpenFileDialog2 As OpenFileDialog
@@ -396,4 +407,5 @@ Partial Class Form1
     Friend WithEvents btn_save As Button
     Friend WithEvents lblLastCommand As Label
     Friend WithEvents lblNoVideo As Label
+    Friend WithEvents btnHelp As Button
 End Class

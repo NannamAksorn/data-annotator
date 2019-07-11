@@ -46,6 +46,41 @@ Public Class Tag
                         End If
                     End If
 
+                    ''' transition '''
+                    If data(1) = 0 Then
+                        Dim newTag As Integer = 0
+                        newTag += _tagList(index)(1) * 10
+                        If newTag > 90 Then
+                            newTag = 90
+                        End If
+                        For nextIndex As Integer = index + 1 To _tagList.Count - 1
+                            If _tagList(nextIndex)(1) < 9 Then
+                                newTag += _tagList(nextIndex)(1)
+                                Exit For
+                            End If
+                        Next
+                        data(1) = newTag
+
+                    End If
+
+                    ''' change prev transition'''
+                    If index <> 0 And
+                        data(1) < 9 And
+                        _tagList(index)(1) > 9 Then
+                        _tagList(index)(1) = data(1) + (_tagList(index)(1) \ 10) * 10
+                        _buttonList(index).text = data(1) + (_tagList(index)(1) \ 10) * 10
+                    End If
+
+                    Trace.WriteLine(index)
+                    ''' change Next transition'''
+                    If index <> _tagList.Count - 1 And
+                        data(1) < 9 Then
+                        If _tagList(index + 1)(1) > 9 Then
+                            _tagList(index + 1)(1) = data(1) * 10 + (_tagList(index + 1)(1) Mod 10)
+                            _buttonList(index + 1).text = data(1) * 10 + (_tagList(index + 1)(1) Mod 10)
+                        End If
+                    End If
+
                     _tagList.Insert(index + 1, data)
                     addButton(index + 1, data)
                     _undostack.Push({INSERT, index + 1, data})
@@ -73,6 +108,11 @@ Public Class Tag
         If data(1) = 0 Then
             btn.Text = "T"
             btn.Top -= 10
+        ElseIf data(1) > 9 Then
+            Dim fnt As Font
+            fnt = btn.Font
+            btn.Font = New Font(fnt.Name, fnt.Size - 3)
+            btn.Top -= 10
         End If
         _form.Controls.Add(btn)
 
@@ -80,7 +120,6 @@ Public Class Tag
 
         AddHandler btn.Click, AddressOf delHandler
         _buttonList.Insert(index, btn)
-
     End Sub
 
     Public Sub update()
